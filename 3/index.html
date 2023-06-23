@@ -38,10 +38,11 @@
   // 先告js 影像物件
   var myImage = new Image();
   // 指定本地端範例影像路徑
-  //myImage.src = "%s";
-  myImage.src = image_uploads;
+  myImage.src = "%s"; 
   // 一旦成功載入影像，觸發執行loadImage函式
-  myImage.addEventListener("load", loadImage, false);
+  //myImage.addEventListener("load", loadImage, false);
+  myImage.addEventListener("load", image_uploads, false);
+  
 
   // 觸發函式
   async function loadImage(e) {
