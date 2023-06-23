@@ -15,10 +15,12 @@
     <h2>Processing...</h2>
   </header>
   
-  <form id="myform" method="" action="" enctype="multipart/form-data">
-  請上傳圖片:<input type="file" id="profile_pic" name="profile_pic" accept=".jpg, .jpeg, .png"><br>
-  <input type="submit">
-  </form>
+ <form method="post" enctype="multipart/form-data">
+	<div>
+		<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png"   style="position:absolute;height:320px;width:550px;">
+	</div>
+	<div style="float:left;background:#cccccc;height:320px;width:550px;text-align:center;z-index:1;"><p style="line-height: 300px;">未選擇任何檔案</p></div>
+</form>
   
   <!-- 用於呈現分析結果canvas -->
   <canvas id='canvas1'></canvas>
