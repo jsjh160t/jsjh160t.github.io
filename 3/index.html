@@ -15,12 +15,6 @@
     <h2>Processing...</h2>
   </header>
   
-<form method="post" enctype="multipart/form-data">
-	<div>
-	<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png"   style="position:absolute;height:320px;width:550px;">
-	</div>
-</form>
-  
   <!-- 用於呈現分析結果canvas -->
   <canvas id='canvas1'></canvas>
 </body>
@@ -40,9 +34,7 @@
   // 指定本地端範例影像路徑
   myImage.src = "%s"; 
   // 一旦成功載入影像，觸發執行loadImage函式
-  //myImage.addEventListener("load", loadImage, false);
-  myImage.addEventListener("load", image_uploads, false);
-  
+  myImage.addEventListener("load", loadImage, false);
 
   // 觸發函式
   async function loadImage(e) {
