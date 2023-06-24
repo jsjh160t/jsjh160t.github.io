@@ -11,3 +11,5 @@ Fuzzy控制：<br>
 4/Template Image Object Detection ：od_sample4<br>
 5/WebCam Image Object Detection  無法擷取影像(20230624解決且分開html與js)<br>
 6/WebCam Video  Object Detection<br>
+7/Template Image 人體姿態(靜態) ：pose_sample2  firefox可以<br>
+8/
