@@ -1,20 +1,30 @@
 <script>
-  var url = "https://api.github.com/repos/jsjh160t/jsjh160t.github.io/contents/3/3.jpg?access_token=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",
-    
-  $.ajax({
-    type: "put",
-    url: url,
-    headers: {
-      "Content-Type": "application/json" // 指定送出資料為 json 格式
-    },
-    data: JSON.stringify(data), // 一定要將物件轉成字串才會被接受
-    success: function ()json {
-      console.log("good! " + JSON.stringify(json));
-    },
-    error: function ()json {
-    console.log("error! " + JSON.stringify(json));
-    }
-  });
+  const accessToken = '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'; //YOUR_ACCESS_TOKEN
+  const owner = 'jsjh160t'; //YOUR_USERNAME
+  const repo = 'jsjh160t.github.io';  //YOUR_REPO
+  const path = '3/3.jpg'; // 上傳的圖片路徑
+  const fileContent = 'BASE64_ENCODED_IMAGE_CONTENT'; // 圖片的Base64編碼內容
+  //var url = "https://api.github.com/repos/jsjh160t/jsjh160t.github.io/contents/3/3.jpg?access_token=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",
+  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`; 
+  const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify({
+        message: 'Upload image',
+        content: fileContent
+      })
+    };
+  fetch(apiUrl, requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Image uploaded:', data);
+    })
+    .catch(error => {
+      console.error('Error uploading image:', error);
+    });
 
   
   // 宣告canvas 物件
