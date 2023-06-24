@@ -33,13 +33,6 @@
             .then(response => response.json())
             .then(data => {
               console.log('Image uploaded:', data);
-
-              // 顯示預覽圖片
-              //const previewContainer = document.getElementById('previewContainer');
-              //const imagePreview = document.createElement('img');
-              //imagePreview.src = URL.createObjectURL(file);
-              //previewContainer.appendChild(imagePreview);
-
               
               //進行預測
               // 宣告canvas 物件
