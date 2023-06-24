@@ -39,7 +39,7 @@
               const imagePreview = document.createElement('img');
               imagePreview.src = URL.createObjectURL(file);
               previewContainer.appendChild(imagePreview);
-              preDiction(); //進行預測
+              preDiction(imagePreview); //進行預測
             })
             .catch(error => {
               console.error('Error uploading image:', error);
@@ -51,7 +51,7 @@
     }
 
 
-  function preDiction() {
+  function preDiction(imagePreview) {
     // 宣告canvas 物件
     const canvas1 = document.getElementById('canvas1');
     // 宣告canvas 繪圖物件
@@ -64,7 +64,7 @@
     // 先告js 影像物件
     var myImage = new Image();
     // 指定本地端範例影像路徑
-    myImage.src = "3.jpg"; 
+    myImage.src = imagePreview; 
     // 一旦成功載入影像，觸發執行loadImage函式
     myImage.addEventListener("load", loadImage, false);
 
