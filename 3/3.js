@@ -39,7 +39,7 @@
               const imagePreview = document.createElement('img');
               imagePreview.src = URL.createObjectURL(file);
               previewContainer.appendChild(imagePreview);
-              preDiction(); //進行預測
+              preDiction(file); //進行預測
             })
             .catch(error => {
               console.error('Error uploading image:', error);
@@ -51,7 +51,7 @@
     }
 
 
-  function preDiction() {
+  function preDiction(file) {
     // 宣告canvas 物件
     const canvas1 = document.getElementById('canvas1');
     // 宣告canvas 繪圖物件
