@@ -20,7 +20,7 @@ async function takePhoto() {
   document.body.appendChild(div);
   div.appendChild(video);
   video.srcObject = stream; // 使影片物件顯示串流內容
-  await video.play();
+  await video.play();  
 
   // 等待點擊攝影按鈕
   await new Promise((resolve) => capture.onclick = resolve);
@@ -36,7 +36,7 @@ async function takePhoto() {
 
   // 模型推論分析
   const predictions = await model.detect(canvas);
-  
+
   // 繪製分析結果
   ctx.strokeStyle = "red";
   ctx.font = "30px Arial";
