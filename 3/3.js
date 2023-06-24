@@ -63,7 +63,7 @@
   // 先告js 影像物件
   var myImage = new Image();
   // 指定本地端範例影像路徑
-  myImage.src = "3.jpg"; 
+  myImage.src = "%s"; 
   // 一旦成功載入影像，觸發執行loadImage函式
   myImage.addEventListener("load", loadImage, false);
 
