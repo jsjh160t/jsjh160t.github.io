@@ -4,6 +4,8 @@ const canvas = document.getElementById('canvas1');
 // 宣告canvas 繪圖物件
 var ctx = canvas.getContext('2d')
 
+takePhoto()
+
 // webcam 攝影
 async function takePhoto() {
   // 讀取模型
@@ -55,5 +57,3 @@ async function takePhoto() {
       ctx.fillText(predictions[i].class, x, y+30);
   }
 }
-
-takePhoto()
