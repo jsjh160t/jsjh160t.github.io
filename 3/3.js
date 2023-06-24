@@ -51,7 +51,7 @@
     }
 
 
-  function preDiction(imagePreview) {
+  function preDiction() {
     // 宣告canvas 物件
     const canvas1 = document.getElementById('canvas1');
     // 宣告canvas 繪圖物件
