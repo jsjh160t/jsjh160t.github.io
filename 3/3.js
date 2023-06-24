@@ -1,4 +1,3 @@
-<script> 
   //const fileContent = 'BASE64_ENCODED_IMAGE_CONTENT'; // 圖片的Base64編碼內容
   //var url = "https://api.github.com/repos/jsjh160t/jsjh160t.github.io/contents/3/3.jpg?access_token=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",
   
@@ -93,4 +92,3 @@
       });
     });
   }    
-</script>
