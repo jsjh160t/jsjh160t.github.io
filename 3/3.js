@@ -1,10 +1,6 @@
 <script>
   var url = "https://api.github.com/repos/jsjh160t/jsjh160t.github.io/contents/3/3.jpg?access_token=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",
-    data = {
-      "message": "test", // 檔案的備註資訊
-      "content": "bXkgbmV3IGZpbGUgY29udGVudHM=" // base64 編碼
-    };
-
+    
   $.ajax({
     type: "put",
     url: url,
