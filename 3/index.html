@@ -9,9 +9,9 @@
 </head>
 
 <body>
-  <form id="upload-form" enctype="multipart/form-data">
-    <input type="file" id="file-input" name="file" accept="image/*">
-    <button type="submit">上傳圖片</button>
+  <form id="upload-form"  enctype="multipart/form-data">
+    <input type="file"  id="file-input" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/jpg, image/jpeg, image/png"/ >
+    <img id="preview_progressbarTW_img" src="#" />
   </form>
 	
   <!-- 呈現影像類別結果 -->
