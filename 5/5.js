@@ -29,7 +29,7 @@ async function takePhoto() {
   // canvas 繪製底圖
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
-  ctx.drawImage(video, 0, 300);  //修改下移
+  ctx.drawImage(video, 0, 0);
 
   // 停止 webcamera
   stream.getVideoTracks()[0].stop();
