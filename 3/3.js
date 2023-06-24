@@ -1,31 +1,23 @@
 <script>
-  document.getElementById('upload-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // 阻止表單預設提交行為
+  var url = "https://api.github.com/repos/jsjh160t/jsjh160t.github.io/contents/3/3.jpg?access_token=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",
+    data = {
+      "message": "test", // 檔案的備註資訊
+      "content": "bXkgbmV3IGZpbGUgY29udGVudHM=" // base64 編碼
+    };
 
-    var fileInput = document.getElementById('file-input');
-    var file = fileInput.files[0];
-
-    if (!file) {
-      alert('請選擇一個圖片檔案。');
-      return;
+  $.ajax({
+    type: "put",
+    url: url,
+    headers: {
+      "Content-Type": "application/json" // 指定送出資料為 json 格式
+    },
+    data: JSON.stringify(data), // 一定要將物件轉成字串才會被接受
+    success: function ()json {
+      console.log("good! " + JSON.stringify(json));
+    },
+    error: function ()json {
+    console.log("error! " + JSON.stringify(json));
     }
-
-    var formData = new FormData();
-    formData.append('file', file);
-
-    // 上傳圖片到 GitHub
-    var apiUrl = 'https://api.github.com/repos/jsjh160t/jsjh160t.github.io/contents/3/3.jpg?access_token=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';
-    fetch(apiUrl, {
-      method: 'PUT',
-      body: formData
-    })
-      .then(response => response.json())
-      .then(data => {
-        alert('圖片上傳成功！');
-      })
-      .catch(error => {
-        console.error('圖片上傳失敗：', error);
-      });
   });
 
   
