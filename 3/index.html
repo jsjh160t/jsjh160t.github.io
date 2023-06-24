@@ -9,10 +9,10 @@
 </head>
 
 <body>
-  <form id="upload-form"  enctype="multipart/form-data">
-    <input type="file"  id="file-input" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/jpg, image/jpeg, image/png"/ >
-    <img id="preview_progressbarTW_img" src="#" />
-  </form>
+  <h1>Upload Image to GitHub</h1>  
+  <input type="file" id="imageInput">
+  <button onclick="uploadImage()">Upload</button>
+  <div id="previewContainer"></div>
 	
   <!-- 呈現影像類別結果 -->
   <h1>Prediction: </h1>
