@@ -25,6 +25,54 @@
     .catch(error => {
       console.error('Error uploading image:', error);
     });
+ function uploadImage() {
+      const accessToken = 'YOUR_ACCESS_TOKEN';
+      const owner = 'YOUR_USERNAME';
+      const repo = 'YOUR_REPO';
+      const path = 'images/image.jpg'; // 上傳的圖片路徑
+
+      const imageInput = document.getElementById('imageInput');
+      const file = imageInput.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const fileContent = event.target.result.split(',')[1]; // 取得Base64編碼的圖片內容
+
+          const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
+          const requestOptions = {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify({
+              message: 'Upload image',
+              content: fileContent
+            })
+          };
+
+          fetch(apiUrl, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+              console.log('Image uploaded:', data);
+
+              // 顯示預覽圖片
+              const previewContainer = document.getElementById('previewContainer');
+              const imagePreview = document.createElement('img');
+              imagePreview.src = URL.createObjectURL(file);
+              previewContainer.appendChild(imagePreview);
+            })
+            .catch(error => {
+              console.error('Error uploading image:', error);
+            });
+        };
+
+        reader.readAsDataURL(file);
+      }
+    }
+
 
   
   // 宣告canvas 物件
