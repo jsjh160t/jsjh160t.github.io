@@ -82,7 +82,7 @@
                     header4.innerText = predictions[0]['probability'];
                   });
                 });
-              
+              }
             })
             .catch(error => {
               console.error('Error uploading image:', error);
