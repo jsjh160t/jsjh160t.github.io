@@ -21,7 +21,7 @@
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${accessToken}`
+              'Authorization': 'Bearer ${accessToken}'
             },
             body: JSON.stringify({
               message: 'Upload image',
