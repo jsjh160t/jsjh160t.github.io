@@ -32,7 +32,7 @@ async function takePhoto() {
   await video.play();
 
   // 調整Video Element 大小
-  google.colab.output.setIframeHeight(document.documentElement.scrollHeight, true);
+  //google.colab.output.setIframeHeight(document.documentElement.scrollHeight, true);
 
   // 等待點擊攝影按鈕
   await new Promise((resolve) => capture.onclick = resolve);
