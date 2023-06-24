@@ -23,16 +23,13 @@ async function takePhoto() {
   video.srcObject = stream; // 使影片物件顯示串流內容
   await video.play();
 
-  // 調整Video Element 大小
-  //google.colab.output.setIframeHeight(document.documentElement.scrollHeight, true);
-
   // 等待點擊攝影按鈕
   await new Promise((resolve) => capture.onclick = resolve);
 
   // canvas 繪製底圖
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
-  ctx.drawImage(video, 0, 0);
+  ctx.drawImage(video, 0, 100);  //修改下移
 
   // 停止 webcamera
   stream.getVideoTracks()[0].stop();
