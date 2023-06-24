@@ -12,15 +12,6 @@
 <canvas id='canvas1'></canvas>
 
 <script>
-  async function initWebGPU() {
-    if (!navigator.gpu) {
-      // 檢查瀏覽器是否支援 WebGPU
-      console.error('WebGPU is not supported in this browser.');
-      return;
-    }  
-  }
-  initWebGPU();
-  
 // 宣告canvas 物件
 const canvas1 = document.getElementById('canvas1');
 // 宣告canvas 繪圖物件
