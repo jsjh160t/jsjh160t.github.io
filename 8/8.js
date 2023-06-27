@@ -42,8 +42,10 @@
 
               // 宣告js 影像物件
               var myImage = new Image();
-              // 指定本地端範例影像路徑
-              myImage.src = "%s";
+              
+              // 指定上傳本地端影像路徑(URL)
+              myImage.src = URL.createObjectURL(file); 
+              
               // 一旦成功載入影像，觸發執行loadImage函式
               myImage.addEventListener("load", loadImage, false);
 
