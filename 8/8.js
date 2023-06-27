@@ -5,7 +5,7 @@
       const accessToken = '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'; //YOUR_ACCESS_TOKEN
       const owner = 'jsjh160t'; //YOUR_USERNAME
       const repo = 'jsjh160t.github.io';  //YOUR_REPO
-      const path = '3/3.jpg'; // 上傳的圖片路徑
+      const path = '8/8.jpg'; // 上傳的圖片路徑
 
       const imageInput = document.getElementById('imageInput');
       const file = imageInput.files[0];
@@ -53,7 +53,7 @@
                 //方法1.等待~~確保 TensorFlow.js 在進行其他操作之前已經初始化。
                 //await tf.ready();
                 //方法2.等待 TensorFlow.js 初始化，確保後端已經設置好並且準備就緒。
-                await tf.setBackend('webgl');
+                //await tf.setBackend('webgl');
   
                 // 範例影像大小
                 img_width = myImage.width;
