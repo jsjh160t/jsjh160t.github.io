@@ -25,8 +25,11 @@ myImage.src = "pose_sample2.jpeg";
 // 一旦成功載入影像，觸發執行loadImage函式
 myImage.addEventListener("load", loadImage, false);
 
+
 // 觸發函式
 async function loadImage(e) {
+  //等待~~
+  await tf.ready();
   // 範例影像大小
   img_width = myImage.width;
   img_height = myImage.height;
