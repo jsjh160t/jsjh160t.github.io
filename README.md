@@ -20,6 +20,6 @@ Fuzzy控制：<br>
     await tf.setBackend('webgl');<br>  
 8/Custom Image 人體姿態(靜態) ：無法上傳檔案(20230624解決--自訂上傳按鈕且分開html與js)<br>
   20230627增加同上指令，就可以在chrome正常執行。<br>
-9/WebCam Image 人體姿態(動態) ：
-10/WebCam Video 人體姿態(動態) ：
-11/多人 人體姿態(動態) ：
+9/WebCam Image 人體姿態(動態) ：<br>
+10/WebCam Video 人體姿態(動態) ：<br>
+11/多人 人體姿態(動態) ：<br>
