@@ -25,7 +25,6 @@ myImage.src = "pose_sample2.jpeg";
 // 一旦成功載入影像，觸發執行loadImage函式
 myImage.addEventListener("load", loadImage, false);
 
-
 // 觸發函式
 async function loadImage(e) {
   //方法1.等待~~確保 TensorFlow.js 在進行其他操作之前已經初始化。
