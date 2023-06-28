@@ -55,9 +55,10 @@
                 const img = document.createElement("img");
                 img.src = window.URL.createObjectURL(file);
                 img.onload = async () => {
-                    await predictImage(img);
-                    URL.revokeObjectURL(img.src); // Clean up object URL
-                };
+  					await predictImage(img, model);
+  					URL.revokeObjectURL(img.src); // Clean up object URL
+				};
+
             };
             input.click();
         }
