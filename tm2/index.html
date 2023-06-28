@@ -3,12 +3,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest"></script>
 </head>
 <body>
-	<div>Teachable Machine Image Model</div>
-	<button type="button" onclick="init()">Start</button>
-	<input type="file" id="imageUpload" onchange="openImage(event)" accept="image/*" style="display: none;">
-	<div id="image-container"></div>
-	<div id="label-container"></div>
-
 	<script type="text/javascript">
 		// More API functions here:
 		// https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
@@ -65,4 +59,11 @@
 			}
 		}
 	</script>
+	
+	<div>Teachable Machine Image Model</div>
+	<button type="button" onclick="init()">Start</button>
+	<input type="file" id="imageUpload" onchange="openImage(event)" accept="image/*" style="display: none;">
+	<div id="image-container"></div>
+	<div id="label-container"></div>
+	
 </body>
