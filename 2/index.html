@@ -1,9 +1,11 @@
-<!-- 讀取tfjs套件 -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
-<!-- 讀取模型套件 -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
-
-<body>
+<html>
+  <head>
+    <!-- 讀取tfjs套件 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
+    <!-- 讀取模型套件 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
+ </head>
+ <body>
   <!-- 呈現影像類別結果 -->
   <h1>Prediction: </h1>
   <header id="prediction">
@@ -17,8 +19,6 @@
 
   <!-- 用於呈現影像的canvas -->
   <canvas id='canvas1'></canvas>
-</body>
-
 <script>
   // 宣告canvas 物件
   const canvas1 = document.getElementById('canvas1');
@@ -64,3 +64,4 @@
   }
 
 </script>
+</html>
