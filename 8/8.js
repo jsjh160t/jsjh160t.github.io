@@ -51,7 +51,6 @@
 
               // 觸發函式
               async function loadImage(e) {
-
                 //方法1.等待~~確保 TensorFlow.js 在進行其他操作之前已經初始化。
                 await tf.ready();
                 //方法2.等待 TensorFlow.js 初始化，確保後端已經設置好並且準備就緒。
