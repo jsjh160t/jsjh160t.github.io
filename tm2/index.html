@@ -53,7 +53,7 @@
             input.onchange = async (event) => {
                 const file = event.target.files[0];
                 const img = document.createElement("img");
-                img.src = URL.createObjectURL(file);
+                img.src = window.URL.createObjectURL(file);
                 img.onload = async () => {
                     await predictImage(img);
                     URL.revokeObjectURL(img.src); // Clean up object URL
