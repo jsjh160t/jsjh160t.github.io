@@ -1,18 +1,17 @@
 <head>
-	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest"></script>
 </head>
 <body>
 	<div>Teachable Machine Image Model</div>
 	<button type="button" onclick="loadModel()">Load Model</button>
 	<button type="button" onclick="openLocalFolder()">Open Local Folder</button>
+	<div id="image-container"></div>
 	<div id="label-container"></div>
 
 	<script type="text/javascript">
-	    // More API functions here:
-	    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
-
 	    let model, labelContainer, maxPredictions;
+	    let imageContainer;
 
 	    async function loadModel() {
 	        const URL = "./tm-my-image-model/";
@@ -49,10 +48,27 @@
 	            img.src = URL.createObjectURL(file);
 
 	            img.onload = async function() {
+	                showImage(img);
 	                await predict(img);
 	                URL.revokeObjectURL(img.src);
 	            };
 	        }
+	    }
+
+	    function showImage(image) {
+	        // Clear previous image
+	        if (imageContainer && imageContainer.firstChild) {
+	            imageContainer.removeChild(imageContainer.firstChild);
+	        }
+
+	        // Create new image element and append it to the container
+	        const imgElement = document.createElement("img");
+	        imgElement.src = image.src;
+	        imgElement.style.maxWidth = "100%";
+	        imgElement.style.height = "auto";
+
+	        imageContainer = document.getElementById("image-container");
+	        imageContainer.appendChild(imgElement);
 	    }
 
 	    async function predict(image) {
