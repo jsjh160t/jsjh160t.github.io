@@ -1,6 +1,6 @@
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest"></script>
 </head>
 <body>
     <div>Teachable Machine Image Model</div>
@@ -27,7 +27,7 @@
             maxPredictions = model.getTotalClasses();
 
             labelContainer = document.getElementById("label-container");
-            for (let i = 0; i < maxPredictions; i++) { // and class labels
+            for (let i = 0; i < maxPredictions; i++) {
                 labelContainer.appendChild(document.createElement("div"));
             }
         }
@@ -37,7 +37,7 @@
             const file = event.target.files[0];
             const reader = new FileReader();
             reader.onload = async function() {
-                const image = new Image();
+                const image = document.createElement('img');
                 image.src = reader.result;
                 image.width = 200; // Set desired width of the image
                 image.height = 200; // Set desired height of the image
@@ -55,12 +55,6 @@
         }
 
         async function predict(image) {
-            // Clear previous predictions
-            for (let i = 0; i < maxPredictions; i++) {
-                labelContainer.childNodes[i].innerHTML = "";
-            }
-
-            // predict can take in an image, video or canvas html element
             const prediction = await model.predict(image);
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction =
