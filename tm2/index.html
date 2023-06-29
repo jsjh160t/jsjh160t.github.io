@@ -6,6 +6,7 @@
     <div>Teachable Machine Image Model</div>
     <input type="file" accept="image/*" id="imageUpload" onchange="uploadImage(event)">
     <div id="label-container"></div>
+    <div id="uploaded-image-container"></div>
 
     <script type="text/javascript">
         // More API functions here:
@@ -40,9 +41,17 @@
                 image.src = reader.result;
                 image.width = 200; // Set desired width of the image
                 image.height = 200; // Set desired height of the image
+                showUploadedImage(image);
                 await predict(image);
             }
             reader.readAsDataURL(file);
+        }
+
+        // Function to display the uploaded image
+        function showUploadedImage(image) {
+            const uploadedImageContainer = document.getElementById("uploaded-image-container");
+            uploadedImageContainer.innerHTML = "";
+            uploadedImageContainer.appendChild(image);
         }
 
         async function predict(image) {
