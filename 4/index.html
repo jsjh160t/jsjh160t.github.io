@@ -1,54 +1,62 @@
-<!-- 讀取tfjs依賴套件 -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
-<!-- 讀取物件偵測套件 -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>影像識別推論成果展示(上傳影像預測)</title>
+    <!-- 讀取tfjs依賴套件 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+    <!-- 讀取物件偵測套件 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+  </head>
+  <body>
+    <!-- 呈現結果的canvas -->
+    <canvas></canvas> 
+    
+    <script>
+    // 宣告canvas 物件
+    var canvas = document.querySelector('canvas')
+    // canvas 繪製物件
+    var ctx = canvas.getContext('2d')
 
-<!-- 呈現結果的canvas -->
-<canvas></canvas> 
-<script>
-// 宣告canvas 物件
-var canvas = document.querySelector('canvas')
-// canvas 繪製物件
-var ctx = canvas.getContext('2d')
+    // 宣告js影像物件
+    var myImage = new Image();
+    myImage.src = "od_sample4.jpeg"; // 範例影像路徑
+    myImage.addEventListener("load", loadImage, false);// 一旦成功讀取影像，觸發loadImage
 
-// 宣告js影像物件
-var myImage = new Image();
-myImage.src = "od_sample4.jpeg"; // 範例影像路徑
-myImage.addEventListener("load", loadImage, false);// 一旦成功讀取影像，觸發loadImage
+    // 觸發函示
+    function loadImage(e) {
+      // 範例影像大小
+      img_width = myImage.width;
+      img_height = myImage.height;
 
-// 觸發函示
-function loadImage(e) {
-  // 範例影像大小
-  img_width = myImage.width;
-  img_height = myImage.height;
+      // 調整canvas大小
+      canvas.width = img_width;
+      canvas.height = img_height;
 
-  // 調整canvas大小
-  canvas.width = img_width;
-  canvas.height = img_height;
+      ctx.strokeStyle = "red"; // 物件框顏色
+      ctx.font = "30px Arial"; // 物件類別註解文字大小
+      ctx.drawImage(myImage, 0, 0, img_width, img_height);// 繪製底圖
 
-  ctx.strokeStyle = "red"; // 物件框顏色
-  ctx.font = "30px Arial"; // 物件類別註解文字大小
-  ctx.drawImage(myImage, 0, 0, img_width, img_height);// 繪製底圖
+      // 讀取模型
+      cocoSsd.load().then(model => {
+        // 模型分析推論
+        model.detect(canvas).then(predictions => {
+          // 繪製分析結果
+          for (var i = 0; i < predictions.length; i++) {
+              console.log(predictions[i]);
 
-  // 讀取模型
-  cocoSsd.load().then(model => {
-    // 模型分析推論
-    model.detect(canvas).then(predictions => {
-      // 繪製分析結果
-      for (var i = 0; i < predictions.length; i++) {
-          console.log(predictions[i]);
+              // 物件框
+              var x = predictions[i].bbox[0];
+              var y = predictions[i].bbox[1];
+              var w = predictions[i].bbox[2];
+              var h = predictions[i].bbox[3];
+              ctx.strokeRect(x, y, w, h);
 
-          // 物件框
-          var x = predictions[i].bbox[0];
-          var y = predictions[i].bbox[1];
-          var w = predictions[i].bbox[2];
-          var h = predictions[i].bbox[3];
-          ctx.strokeRect(x, y, w, h);
-
-          // 物件類別文字
-          ctx.fillText(predictions[i].class, x, y+30);
-      }
-    });
-  });
-}
-</script>
+              // 物件類別文字
+              ctx.fillText(predictions[i].class, x, y+30);
+          }
+        });
+      });
+    }
+    </script>
+  </body>
+</html>
