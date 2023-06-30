@@ -5,7 +5,7 @@ function uploadImage() {
       const accessToken = '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'; //YOUR_ACCESS_TOKEN
       const owner = 'jsjh160t'; //YOUR_USERNAME
       const repo = 'jsjh160t.github.io';  //YOUR_REPO
-      const path = '8/8.jpg'; // 上傳的圖片路徑
+      const path = '11/11.jpg'; // 上傳的圖片路徑
 
       const imageInput = document.getElementById('imageInput');
       const file = imageInput.files[0];
