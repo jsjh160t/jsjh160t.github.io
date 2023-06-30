@@ -9,7 +9,7 @@ Fuzzy控制：<br>
 2/Template Image Classification ：tiger cat<br>
 3/Custom Image Classification  ：無法上傳檔案(20230624解決--自訂上傳按鈕且分開html與js)<br>
 4/Template Image Object Detection ：od_sample4<br>
-5/WebCam Image Object Detection  無法擷取影像(20230624解決且分開html與js)<br>
+5/WebCam Image Object Detection  無法擷取影像(20230624解決--將google.colab那一行註解掉)<br>
 6/WebCam Video Object Detection<br>
 7/Template Image 人體姿態(靜態) ：pose_sample2  firefox可以，chrome不行<br>
   20230627增加以下指令，就可以在chrome正常執行：<br>
