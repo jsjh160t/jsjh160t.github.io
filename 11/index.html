@@ -1,78 +1,83 @@
-<!-- 相關依賴套件載入 -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>多人體姿態估測成果展示(上傳影像預測)</title>
+    <!-- 相關依賴套件載入 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+    <!-- 本章節採用tfjs，因此載入TF.js backend -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+    <!-- 載入手勢辨識模型 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+  </head>
+  <body>  
+    <!-- 用於呈現分析結果canvas -->
+    <canvas id='canvas1'></canvas>
 
-<!-- 本章節採用tfjs，因此載入TF.js backend -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+    <script>
+      // 宣告canvas 物件
+      const canvas1 = document.getElementById('canvas1');
+      // 宣告canvas 繪圖物件
+      var ctx = canvas1.getContext('2d')
 
-<!-- 載入手勢辨識模型 -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+      // 先告js 影像物件
+      var myImage = new Image();
+      // 指定本地端範例影像路徑
+      myImage.src = "%s";
+      // 一旦成功載入影像，觸發執行loadImage函式
+      myImage.addEventListener("load", loadImage, false);
 
-<!-- 用於呈現分析結果canvas -->
-<canvas id='canvas1'></canvas>
+      // 觸發函式
+      async function loadImage(e) {
+        // 範例影像大小
+        img_width = myImage.width;
+        img_height = myImage.height;
 
-<script>
-// 宣告canvas 物件
-const canvas1 = document.getElementById('canvas1');
-// 宣告canvas 繪圖物件
-var ctx = canvas1.getContext('2d')
+        // 調整canvas大小
+        canvas1.width = img_width;
+        canvas1.height = img_height;
 
-// 先告js 影像物件
-var myImage = new Image();
-// 指定本地端範例影像路徑
-myImage.src = "%s";
-// 一旦成功載入影像，觸發執行loadImage函式
-myImage.addEventListener("load", loadImage, false);
+        // 人體關節點註解文字顏色
+        ctx.strokeStyle = "red";
+        // 人體關節點註解文字大小&字體
+        ctx.font = "20px Arial";
+        // canvas 繪製底圖
+        ctx.drawImage(myImage, 0, 0, img_width, img_height);
 
-// 觸發函式
-async function loadImage(e) {
-  // 範例影像大小
-  img_width = myImage.width;
-  img_height = myImage.height;
+        // 讀取模型
+        const detectorConfig = {
+          modelType: poseDetection.movenet.modelType.MULTIPOSE_LIGHTNING,
+          enableTracking: true,
+          trackerType: poseDetection.TrackerType.BoundingBox
+        };
+        const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
 
-  // 調整canvas大小
-  canvas1.width = img_width;
-  canvas1.height = img_height;
+        // 模型推論分析
+        const poses = await detector.estimatePoses(canvas1);
 
-  // 人體關節點註解文字顏色
-  ctx.strokeStyle = "red";
-  // 人體關節點註解文字大小&字體
-  ctx.font = "20px Arial";
-  // canvas 繪製底圖
-  ctx.drawImage(myImage, 0, 0, img_width, img_height);
+        // 繪製模型分析結果
+        for (var j = 0; j < poses.length; j++) {
+            keypoints = poses[j].keypoints
+            for (var i = 0; i < keypoints.length; i++) {
+                console.log(keypoints[i]);
 
-  // 讀取模型
-  const detectorConfig = {
-    modelType: poseDetection.movenet.modelType.MULTIPOSE_LIGHTNING,
-    enableTracking: true,
-    trackerType: poseDetection.TrackerType.BoundingBox
-  };
-  const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
+                // 關節點pixel-wise位置
+                x = keypoints[i].x
+                y = keypoints[i].y
 
-  // 模型推論分析
-  const poses = await detector.estimatePoses(canvas1);
+                // 關節點類別
+                name = keypoints[i].name
 
-  // 繪製模型分析結果
-  for (var j = 0; j < poses.length; j++) {
-      keypoints = poses[j].keypoints
-      for (var i = 0; i < keypoints.length; i++) {
-          console.log(keypoints[i]);
+                // 圈選關節點估測位置
+                ctx.beginPath();
+                ctx.arc(x, y, 15, 0, 2 * Math.PI);
+                ctx.stroke();
 
-          // 關節點pixel-wise位置
-          x = keypoints[i].x
-          y = keypoints[i].y
-
-          // 關節點類別
-          name = keypoints[i].name
-
-          // 圈選關節點估測位置
-          ctx.beginPath();
-          ctx.arc(x, y, 15, 0, 2 * Math.PI);
-          ctx.stroke();
-
-          // 繪製關節點文字註解
-          ctx.fillText(name, x+20, y);
+                // 繪製關節點文字註解
+                ctx.fillText(name, x+20, y);
+            }
+        }
       }
-  }
-}
-</script>
+    </script>
+  </body>
+</html>
