@@ -54,13 +54,12 @@
         }
 
         async function predict(image) {
+            await tf.ready(); // Ensure TensorFlow.js is ready
             // Clear previous predictions
             for (let i = 0; i < maxPredictions; i++) {
                 labelContainer.childNodes[i].innerHTML = "";
             }
-
-            await tf.ready();
-            
+                        
             // predict can take in an image, video or canvas html element
             const prediction = await model.predict(image);
             for (let i = 0; i < maxPredictions; i++) {
