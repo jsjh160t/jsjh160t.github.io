@@ -1,71 +1,78 @@
-<!-- 讀取tfjs依賴套件 -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
-<!-- 讀取物件偵測套件 -->
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>物件偵測推論成果展示(視訊動態預測)</title>
+    <!-- 讀取tfjs依賴套件 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+    <!-- 讀取物件偵測套件 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>  
+  </head>
 
 <!-- 用於呈現分析結果canvas -->
 <canvas id='canvas1' height="0" width="0"></canvas>
+  <body>
+    <script>
+    // 宣告canvas 物件
+    const canvas = document.getElementById('canvas1');
+    // 宣告canvas 繪圖物件
+    var ctx = canvas.getContext('2d')
 
-<script>
-// 宣告canvas 物件
-const canvas = document.getElementById('canvas1');
-// 宣告canvas 繪圖物件
-var ctx = canvas.getContext('2d')
+    // webcam 攝影
+    async function takePhoto() {
+      // 讀取模型
+      const model = await cocoSsd.load();
 
-// webcam 攝影
-async function takePhoto() {
-  // 讀取模型
-  const model = await cocoSsd.load();
+      const div = document.createElement('div'); // 空行
+      const capture = document.createElement('button'); // 攝影按鈕
+      capture.textContent = 'Capture'; // 攝影按鈕文字
+      div.appendChild(capture);
 
-  const div = document.createElement('div'); // 空行
-  const capture = document.createElement('button'); // 攝影按鈕
-  capture.textContent = 'Capture'; // 攝影按鈕文字
-  div.appendChild(capture);
+      const video = document.createElement('video'); // 宣告影片物件
+      video.style.display = 'block';
+      const stream = await navigator.mediaDevices.getUserMedia({video: true}); // 宣告串流物件
 
-  const video = document.createElement('video'); // 宣告影片物件
-  video.style.display = 'block';
-  const stream = await navigator.mediaDevices.getUserMedia({video: true}); // 宣告串流物件
+      document.body.appendChild(div);
+      div.appendChild(video);
+      video.srcObject = stream; // 使影片物件顯示串流內容
+      await video.play();
 
-  document.body.appendChild(div);
-  div.appendChild(video);
-  video.srcObject = stream; // 使影片物件顯示串流內容
-  await video.play();
+      // 調整Video Element 大小
+      //google.colab.output.setIframeHeight(document.documentElement.scrollHeight, true);
 
-  // 調整Video Element 大小
-  //google.colab.output.setIframeHeight(document.documentElement.scrollHeight, true);
+      // 等待點擊攝影按鈕
+      await new Promise((resolve) => capture.onclick = resolve);
 
-  // 等待點擊攝影按鈕
-  await new Promise((resolve) => capture.onclick = resolve);
+      // canvas 繪製底圖
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      ctx.drawImage(video, 0, 0);
 
-  // canvas 繪製底圖
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  ctx.drawImage(video, 0, 0);
+      // 停止 webcamera
+      stream.getVideoTracks()[0].stop();
+      div.remove();
 
-  // 停止 webcamera
-  stream.getVideoTracks()[0].stop();
-  div.remove();
+      // 模型推論分析
+      const predictions = await model.detect(canvas);
 
-  // 模型推論分析
-  const predictions = await model.detect(canvas);
+      // 繪製分析結果
+      ctx.strokeStyle = "red";
+      ctx.font = "30px Arial";
+      for (var i = 0; i < predictions.length; i++) {
+          console.log(predictions[i]);
 
-  // 繪製分析結果
-  ctx.strokeStyle = "red";
-  ctx.font = "30px Arial";
-  for (var i = 0; i < predictions.length; i++) {
-      console.log(predictions[i]);
+          // 物件框
+          var x = predictions[i].bbox[0];
+          var y = predictions[i].bbox[1];
+          var w = predictions[i].bbox[2];
+          var h = predictions[i].bbox[3];
+          ctx.strokeRect(x, y, w, h);
 
-      // 物件框
-      var x = predictions[i].bbox[0];
-      var y = predictions[i].bbox[1];
-      var w = predictions[i].bbox[2];
-      var h = predictions[i].bbox[3];
-      ctx.strokeRect(x, y, w, h);
+          // 物件類別文字
+          ctx.fillText(predictions[i].class, x, y+30);
+      }
+    }
 
-      // 物件類別文字
-      ctx.fillText(predictions[i].class, x, y+30);
-  }
-}
-
-takePhoto()
-</script>
+    takePhoto()
+    </script>
+  </body>
+</html>
