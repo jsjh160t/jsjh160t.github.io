@@ -80,7 +80,7 @@
 
                 // 繪製模型分析結果
                 keypoints = poses[0].keypoints
-                for (var i = 0; i < keypoints.length; i++) {
+                for (var i = 0; i < keypoints.length; i++) {   //對應關節
                     console.log(keypoints[i]);
 
                     // 關節點pixel-wise位置
@@ -99,6 +99,7 @@
                     ctx.fillText(name, x+30, y);
                 }
               }
+              
             })
             .catch(error => {
               console.error('Error uploading image:', error);
