@@ -12,26 +12,25 @@ Fuzzy控制：<br>
 5/WebCam Image Object Detection  無法擷取影像(20230624解決且分開html與js)<br>
 6/WebCam Video Object Detection<br>
 7/Template Image 人體姿態(靜態) ：pose_sample2  firefox可以，chrome不行<br>
-  20230627增加指令，就可以在chrome正常執行：<br>
+  20230627增加以下指令，就可以在chrome正常執行：<br>
   // 觸發函式<br>
   async function loadImage(e) {<br>
         //方法1.等待~~確保 TensorFlow.js 在進行其他操作之前已經初始化。<br>
         await tf.ready();<br>
         //方法2.等待 TensorFlow.js 初始化，確保後端已經設置好並且準備就緒。<br>
-        //await tf.setBackend('webgl'); <br>
-        
+        //await tf.setBackend('webgl'); <br>      
 8/Custom Image 人體姿態(靜態) ：無法上傳檔案(20230624解決--自訂上傳按鈕且分開html與js)<br>
   20230627增加同上指令，就可以在chrome正常執行。<br>
 
 9/WebCam Image 人體姿態(動態) ：<br>
-  20230627增加指令，就可以在chrome正常執行。<br>
+  20230627增加以下指令，就可以在chrome正常執行。<br>
   // webcam 攝影
   async function takePhoto() {
     //方法1.等待~~確保 TensorFlow.js 在進行其他操作之前已經初始化。
     //await tf.ready();
     //方法2.等待 TensorFlow.js 初始化，確保後端已經設置好並且準備就緒。
     await tf.setBackend('webgl');
-   
 10/WebCam Video 人體姿態(動態) ：<br>
 11/多人 人體姿態(動態) ：<br>
+12/tmo~tm2：teachable machine的models+javascript，tm0：沒照HTML格式規範，tm1：(原始版)webcam+修改檔案來源，tm2：chatgpt改為上傳檔案並清除預測值+tf.ready()
 
