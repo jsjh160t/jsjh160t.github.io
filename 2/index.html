@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <title>本地端範例影像預測</title>
     <!-- 讀取tfjs套件 -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
     <!-- 讀取模型套件 -->
@@ -29,7 +31,7 @@
   let header2 = document.getElementById("prediction");
   let header4 = document.getElementById("score");
 
-  // 先告js 影像物件
+  // 宣告js 影像物件
   var myImage = new Image();
   // 指定本地端範例影像路徑
   myImage.src = "cat.jpeg";
