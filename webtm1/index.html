@@ -16,6 +16,8 @@
 		<!--tensorflow/tfjs + teachablemachine/image-->
 		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+
+		<script type="text/javascript" src="assets/js/tm1.js"></script>
 	</head>
 	<body id="top">
 
@@ -28,20 +30,24 @@
 
 		<!-- Main -->
 			<div id="main">
-				<script type="text/javascript" src="assets/js/tm1.js"></script>
+				<!--
+				    <script type="text/javascript" src="assets/js/tm1.js"></script>
+				-->
 				<!-- One -->
 					<section id="one">
 						<header class="major">
 							<h2>動物分類視訊版</h2>
 							<button type="button" onclick="init()">啟動鏡頭</button>
 						</header>
+						<!--
 						<div class="row justify-content-center">
 							<div class="col-4"><h3>動態影像</h3></div>
 							<div class="col-4"><h3>分類判別度</h3></div>
 						</div>
+						-->
 						<div class="row justify-content-center">
-							<div class="col-4" id="webcam-container"></div>
-							<div class="col-4" id="label-container"></div>
+							<div class="col-4" id="webcam-container"><h3>動態影像</h3></div>
+							<div class="col-4" id="label-container"><h3>分類判別度</h3></div>
 						</div>
 					</section>
 				<!-- Two -->
