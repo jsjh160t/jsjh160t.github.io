@@ -6,5 +6,5 @@ Fuzzy控制：<br>
 (2)SOM去模糊化模式。<br>
 
 
-webtm1<br>
-webtm2
+webtm1：TM image model in tf.js 視訊版：TM網站下載javascript編修<br>
+webtm2：TM image model in tf.js 上傳圖片版：webtm1修改
