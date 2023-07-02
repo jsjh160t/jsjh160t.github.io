@@ -33,15 +33,27 @@
 					<section id="one">
 						<header class="major">
 							<h2>動物分類視訊版</h2>
+							<button type="button" onclick="init()">Start</button>
 						</header>
-						<p></p>						
-						<button type="button" onclick="init()">Start</button>
-						<div id="webcam-container"></div>
+						<p></p>	
+						<table>
+						    <thead>
+						        <tr>
+						            <th colspan="2">分類判別度</th>
+						        </tr>
+						    </thead>
+						    <tbody>
+						        <tr>
+						            <td><div id="webcam-container"></div></td>
+						            <td><div id="label-container"></div></td>
+						        </tr>
+						    </tbody>
+						</table>
 					</section>
 				<!-- Two -->
 					<section id="two">
 						<h2>分類判別度</h2>
-						<div id="label-container"></div>
+						
 					</section>
 
 				<!-- Three -->
