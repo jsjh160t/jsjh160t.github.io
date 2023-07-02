@@ -22,7 +22,8 @@
 
 	        // Convenience function to setup a webcam
 	        const flip = true; // whether to flip the webcam
-	        webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+	        //webcam = new tmImage.Webcam(100, 100, flip); // width, height, flip
+		webcam = new tmImage.Webcam(240, 240, flip); // TM的一般尺寸   
 	        await webcam.setup(); // request access to the webcam
 	        await webcam.play();
 	        window.requestAnimationFrame(loop);
