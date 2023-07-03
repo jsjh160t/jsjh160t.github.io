@@ -27,17 +27,23 @@ async function init() {
     video.style.width = '100%';
     document.getElementById("video-container").appendChild(video);
 
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        video.srcObject = stream;
-        await video.play();
-        window.requestAnimationFrame(loop);
-    }
+    // Check if the user interacts with the page
+    document.addEventListener('click', startVideo);
 
     // append elements to the DOM
     labelContainer = document.getElementById("label-container");
     for (let i = 0; i < maxPredictions; i++) { // and class labels
         labelContainer.appendChild(document.createElement("div"));
+    }
+}
+
+async function startVideo() {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+        await video.play();
+        document.removeEventListener('click', startVideo); // Remove the event listener after starting the video
+        window.requestAnimationFrame(loop);
     }
 }
 
@@ -48,7 +54,7 @@ async function loop() {
 
 // run the video frame through the image model
 async function predict() {
-    // predict can take in an image, video or canvas html element
+    // predict can take in an image, video, or canvas HTML element
     const prediction = await model.predict(video);
     for (let i = 0; i < maxPredictions; i++) {
         const classPrediction =
@@ -56,3 +62,4 @@ async function predict() {
         labelContainer.childNodes[i].innerHTML = classPrediction;
     }
 }
+
