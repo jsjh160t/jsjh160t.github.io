@@ -29,7 +29,8 @@ async function init() {
     document.getElementById("video-container").appendChild(video);
 
     // Check if the user interacts with the page
-    document.addEventListener('click', startVideo);
+    //document.addEventListener('click', startVideo);  不用再按20230704
+    startVideo();
 
     // append elements to the DOM
     labelContainer = document.getElementById("label-container");
