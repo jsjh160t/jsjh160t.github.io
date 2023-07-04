@@ -26,7 +26,7 @@ async function init() {
     video.setAttribute('playsinline', '');
     video.setAttribute('autoplay', '');
     video.setAttribute('muted', '');
-    video.style.width = '100%';
+    video.style.width = '50%';
     document.getElementById("video-container").appendChild(video);
 
     // Check if the user interacts with the page
