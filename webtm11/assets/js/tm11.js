@@ -12,8 +12,6 @@ async function init() {
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
     
-    await tf.setBackend('webgl'); //等待 TensorFlow.js 初始化，確保後端已經設置好並且準備就緒。
-    
     // load the model and metadata
     // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
     // or files from your local hard drive
@@ -26,7 +24,7 @@ async function init() {
     video.setAttribute('playsinline', '');
     video.setAttribute('autoplay', '');
     video.setAttribute('muted', '');
-    video.style.width = '50%';
+    video.style.width = '100%';
     document.getElementById("video-container").appendChild(video);
 
     // Check if the user interacts with the page
