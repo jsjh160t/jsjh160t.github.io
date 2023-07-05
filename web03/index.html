@@ -19,9 +19,9 @@
 		<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 
 		<!-- 讀取tfjs套件 -->
-	    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"></script>
-	    <!-- 讀取模型套件 -->
-	    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"></script>
+	    	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"></script>
+	    	<!-- 讀取模型套件 -->
+	    	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"></script>
 
 		<!--tm1.js-->
 		<script type="text/javascript" src="assets/js/03.js"></script>
@@ -42,26 +42,26 @@
 						<header class="major">
 							<h2>影像檔案上傳版</h2>							
 							<!-- 上傳的按鈕 -->
-    						<input type="file" id="upload" accept="image/*">
+    							<input type="file" id="upload" accept="image/*">
 						</header>
 						<div class="row justify-content-center">
 							<div class="col-4">
 								<h3>上傳影像的預測結果與可信度</h3>
 								<!-- 用於呈現影像的canvas -->
-    							<canvas id="canvas1"></canvas>
-							</div>
+	    							<canvas id="canvas1"></canvas>
+								</div>
 							<div class="col-4">
 								<!-- 呈現影像類別結果 -->
-							    <h1>Prediction:</h1>
-							    <header id="prediction">
-							      <h2>Processing...</h2>
-							    </header>
+								<h1>Prediction:</h1>
+								<header id="prediction">
+									<h2>Processing...</h2>
+								</header>
 							    
-							    <!-- 呈現分析結果信心分數 -->
-							    <h1>Confidence Score:</h1>
-							    <header id="score">
-							      <h2>Processing...</h2>
-							    </header>
+								<!-- 呈現分析結果信心分數 -->
+								<h1>Confidence Score:</h1>
+								<header id="score">
+								  	<h2>Processing...</h2>
+								</header>
 								<img src="images/star-16x16.png" alt="" />
 							</div>							
 						</div>
