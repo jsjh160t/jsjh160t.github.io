@@ -34,25 +34,25 @@ async function loadVideo(video) {
   canvas1.width = video_width;
   canvas1.height = video_height;
 
+  // 讀取模型
+  const model = await mobilenet.load();
+
   // 開始繪製視訊畫面並進行影像辨識
   function renderFrame() {
     // 繪製視訊畫面到canvas
     ctx.drawImage(video, 0, 0, video_width, video_height);
 
-    // 讀取模型
-    mobilenet.load().then(model => {
-      // 類別分析
-      model.classify(canvas1).then(predictions => {
-        console.log(predictions);
-        // 類別
-        header2.innerText = predictions[0]['className'];
-        // 分數
-        header4.innerText = predictions[0]['probability'];
-
-        // 持續繪製畫面
-        requestAnimationFrame(renderFrame);
-      });
+    // 類別分析
+    model.classify(canvas1).then(predictions => {
+      console.log(predictions);
+      // 類別
+      header2.innerText = predictions[0]['className'];
+      // 分數
+      header4.innerText = predictions[0]['probability'];
     });
+
+    // 持續繪製畫面
+    requestAnimationFrame(renderFrame);
   }
 
   // 開始繪製畫面
