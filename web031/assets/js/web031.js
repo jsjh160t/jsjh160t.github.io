@@ -26,15 +26,15 @@ async function startCamera() {
 // 觸發函式
 async function loadImage(image) {
   // 範例影像大小
-  const img_width = image.videoWidth;
-  const img_height = image.videoHeight;
+  //const img_width = image.videoWidth;
+  //const img_height = image.videoHeight;
 
   // 調整canvas大小
-  canvas1.width = img_width;
-  canvas1.height = img_height;
+  //canvas1.width = img_width;
+  //canvas1.height = img_height;
 
   // canvas繪製底圖
-  ctx.drawImage(image, 0, 0, img_width, img_height);
+  //ctx.drawImage(image, 0, 0, img_width, img_height);
 
   // 讀取模型
   mobilenet.load().then(model => {
