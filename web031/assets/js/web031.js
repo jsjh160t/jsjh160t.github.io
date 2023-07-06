@@ -14,16 +14,15 @@ async function startCamera() {
     // 建立video元素並設定為視訊流來源
     const video = document.createElement("video");
     video.srcObject = stream;
-    video.autoplay = true;
+
+    // 等待使用者互動後再播放視訊
+    videoContainer.addEventListener("click", function() {
+      video.play();
+      videoContainer.removeEventListener("click", arguments.callee);
+    });
 
     // 將video元素加入影像容器
     videoContainer.appendChild(video);
-
-    // 等待視訊載入完成
-    video.addEventListener("loadedmetadata", () => {
-      // 開始影像辨識
-      loadImage(video);
-    });
   } catch (error) {
     console.error("無法存取攝像頭: ", error);
   }
