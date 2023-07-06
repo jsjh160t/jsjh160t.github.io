@@ -1,7 +1,5 @@
-// 宣告canvas物件
-const canvas1 = document.getElementById("canvas1");
-// 宣告canvas繪圖物件
-const ctx = canvas1.getContext("2d");
+// 宣告影像容器物件
+const videoContainer = document.getElementById("video-container");
 
 // 分析結果文字物件
 const header2 = document.getElementById("prediction");
@@ -12,23 +10,20 @@ async function startCamera() {
   try {
     // 取得視訊流
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    
-    // 將視訊流設定為canvas的影像來源
+
+    // 建立video元素並設定為視訊流來源
     const video = document.createElement("video");
     video.srcObject = stream;
-    
+    video.autoplay = true;
+
+    // 將video元素加入影像容器
+    videoContainer.appendChild(video);
+
     // 等待視訊載入完成
     video.addEventListener("loadedmetadata", () => {
-      // 調整canvas大小
-      canvas1.width = video.videoWidth;
-      canvas1.height = video.videoHeight;
-      
       // 開始影像辨識
       loadImage(video);
     });
-    
-    // 將視訊播放到隱藏的video元素上
-    video.play();
   } catch (error) {
     console.error("無法存取攝像頭: ", error);
   }
@@ -40,13 +35,19 @@ async function loadImage(image) {
   const img_width = image.videoWidth;
   const img_height = image.videoHeight;
 
-  // canvas繪製底圖
+  // 建立canvas元素並設定大小
+  const canvas = document.createElement("canvas");
+  canvas.width = img_width;
+  canvas.height = img_height;
+
+  // 繪製影像到canvas
+  const ctx = canvas.getContext("2d");
   ctx.drawImage(image, 0, 0, img_width, img_height);
 
   // 讀取模型
   mobilenet.load().then(model => {
     // 類別分析
-    model.classify(canvas1).then(predictions => {
+    model.classify(canvas).then(predictions => {
       console.log(predictions);
       // 類別
       header2.innerText = predictions[0]['className'];
@@ -54,6 +55,9 @@ async function loadImage(image) {
       header4.innerText = predictions[0]['probability'];
     });
   });
+
+  // 循環呼叫下一張影像
+  requestAnimationFrame(() => loadImage(image));
 }
 
 // 在網頁載入完成後啟動手機鏡頭
