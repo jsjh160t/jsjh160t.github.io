@@ -8,14 +8,15 @@ const header4 = document.getElementById("score");
 // 啟動手機鏡頭並進行影像辨識
 async function startCamera() {
   try {
-    // 取得手機鏡頭的視訊串流
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    
-    // 將視訊串流設定給video元素
     video.srcObject = stream;
-    
-    // 等待視訊串流載入完成後再執行影像辨識
+
     video.addEventListener("loadedmetadata", () => {
+      // 確保視訊尺寸已經設定
+      video.width = video.videoWidth;
+      video.height = video.videoHeight;
+      video.removeEventListener("loadedmetadata", arguments.callee);
+      
       loadImage();
     });
   } catch (error) {
