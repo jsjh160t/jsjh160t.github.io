@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>影像MobileNet識別推論(上傳影像預測)</title>
+		<title>影像MobileNet識別推論(動態影像預測)</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
@@ -37,11 +37,13 @@
 			<div id="main">
 					<section id="one">
 						<header class="major">
-							<h2>影像檔案上傳版</h2>	
+							<h2>動態影像視訊版</h2>							
+							<!-- 上傳的按鈕 -->
+    						<input type="file" id="upload" accept="image/*">
 						</header>
 						<div class="row justify-content-center">
 							<div class="col-4">
-								<h3>上傳影像的預測結果與可信度</h3>
+								<h3>動態影像的預測結果與可信度</h3>
 								<!-- 用於呈現影像的canvas -->
     							<canvas id="canvas1"></canvas>
 							</div>

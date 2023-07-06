@@ -7,41 +7,44 @@ const ctx = canvas1.getContext("2d");
 const header2 = document.getElementById("prediction");
 const header4 = document.getElementById("score");
 
-// 啟動手機鏡頭
-navigator.mediaDevices.getUserMedia({ video: true })
-  .then(function(stream) {
-    // 取得到手機鏡頭的影像串流後，建立video物件來顯示影像
+// 啟動手機鏡頭並進行影像辨識
+async function startCamera() {
+  try {
+    // 取得視訊流
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    
+    // 將視訊流設定為canvas的影像來源
     const video = document.createElement("video");
     video.srcObject = stream;
-    video.autoplay = true;
-
-    // 等待影像載入後觸發執行loadVideo函式
-    video.addEventListener("loadeddata", function() {
-      loadVideo(video);
+    
+    // 等待視訊載入完成
+    video.addEventListener("loadedmetadata", () => {
+      // 調整canvas大小
+      canvas1.width = video.videoWidth;
+      canvas1.height = video.videoHeight;
+      
+      // 開始影像辨識
+      loadImage(video);
     });
-  })
-  .catch(function(error) {
-    console.log("無法存取手機鏡頭: ", error);
-  });
+    
+    // 將視訊播放到隱藏的video元素上
+    video.play();
+  } catch (error) {
+    console.error("無法存取攝像頭: ", error);
+  }
+}
 
 // 觸發函式
-async function loadVideo(video) {
+async function loadImage(image) {
   // 範例影像大小
-  const video_width = video.videoWidth;
-  const video_height = video.videoHeight;
+  const img_width = image.videoWidth;
+  const img_height = image.videoHeight;
 
-  // 調整canvas大小
-  canvas1.width = video_width;
-  canvas1.height = video_height;
+  // canvas繪製底圖
+  ctx.drawImage(image, 0, 0, img_width, img_height);
 
   // 讀取模型
-  const model = await mobilenet.load();
-
-  // 開始繪製視訊畫面並進行影像辨識
-  function renderFrame() {
-    // 繪製視訊畫面到canvas
-    ctx.drawImage(video, 0, 0, video_width, video_height);
-
+  mobilenet.load().then(model => {
     // 類別分析
     model.classify(canvas1).then(predictions => {
       console.log(predictions);
@@ -50,11 +53,8 @@ async function loadVideo(video) {
       // 分數
       header4.innerText = predictions[0]['probability'];
     });
-
-    // 持續繪製畫面
-    requestAnimationFrame(renderFrame);
-  }
-
-  // 開始繪製畫面
-  renderFrame();
+  });
 }
+
+// 在網頁載入完成後啟動手機鏡頭
+window.addEventListener("DOMContentLoaded", startCamera);
