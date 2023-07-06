@@ -15,9 +15,9 @@ navigator.mediaDevices.getUserMedia({ video: true })
     video.srcObject = stream;
     video.autoplay = true;
 
-    // 等待影像載入後觸發執行loadImage函式
+    // 等待影像載入後觸發執行loadVideo函式
     video.addEventListener("loadeddata", function() {
-      loadImage(video);
+      loadVideo(video);
     });
   })
   .catch(function(error) {
@@ -25,27 +25,36 @@ navigator.mediaDevices.getUserMedia({ video: true })
   });
 
 // 觸發函式
-async function loadImage(image) {
+async function loadVideo(video) {
   // 範例影像大小
-  const img_width = image.videoWidth;
-  const img_height = image.videoHeight;
+  const video_width = video.videoWidth;
+  const video_height = video.videoHeight;
 
   // 調整canvas大小
-  canvas1.width = img_width;
-  canvas1.height = img_height;
+  canvas1.width = video_width;
+  canvas1.height = video_height;
 
-  // canvas繪製底圖
-  ctx.drawImage(image, 0, 0, img_width, img_height);
+  // 開始繪製視訊畫面並進行影像辨識
+  function renderFrame() {
+    // 繪製視訊畫面到canvas
+    ctx.drawImage(video, 0, 0, video_width, video_height);
 
-  // 讀取模型
-  mobilenet.load().then(model => {
-    // 類別分析
-    model.classify(image).then(predictions => {
-      console.log(predictions);
-      // 類別
-      header2.innerText = predictions[0]['className'];
-      // 分數
-      header4.innerText = predictions[0]['probability'];
+    // 讀取模型
+    mobilenet.load().then(model => {
+      // 類別分析
+      model.classify(canvas1).then(predictions => {
+        console.log(predictions);
+        // 類別
+        header2.innerText = predictions[0]['className'];
+        // 分數
+        header4.innerText = predictions[0]['probability'];
+
+        // 持續繪製畫面
+        requestAnimationFrame(renderFrame);
+      });
     });
-  });
+  }
+
+  // 開始繪製畫面
+  renderFrame();
 }
