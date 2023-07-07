@@ -1,4 +1,4 @@
-// 宣告canvas物件
+      // 宣告canvas物件
       const canvas1 = document.getElementById("canvas1");
       // 宣告canvas繪圖物件
       const ctx = canvas1.getContext("2d");
