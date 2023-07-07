@@ -6,7 +6,7 @@
 const URL = "tm-my-image-model/";
 
 let model, video, labelContainer, maxPredictions;
-let currentFacingMode = 'environment'; // 初始為後鏡頭
+let currentFacingMode = 'user'; // 改初始為前鏡頭，不是後鏡頭'environment'
 
 // Load the image model and setup the video
 async function init() {
