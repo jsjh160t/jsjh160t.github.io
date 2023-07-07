@@ -1,3 +1,23 @@
+// 將文本從英文翻譯成中文
+async function translateToChinese(text) {
+  const apiKey = 'AIzaSyCG-K7QWtn5ff3_zkY8dSgNd4eAo7hKSJs'; // 請替換為你的Google翻譯API金鑰YOUR_API_KEY
+  const targetLanguage = 'zh-tw'; 
+  const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      q: text,
+      target: targetLanguage,
+    }),
+  });
+  const data = await response.json();
+  const translation = data.data.translations[0].translatedText;
+  return translation;
+}
+
 // 宣告video物件
 const video = document.getElementById("video");
 // 宣告切換鏡頭按鈕
@@ -56,7 +76,9 @@ function predictLoop() {
     model.classify(video).then(predictions => {
       console.log(predictions);
       // 類別
-      header2.innerText = predictions[0]['className'];
+      const clas = predictions[0]['className'];
+      const translatedClas = await translateToChinese(clas);
+      header2.innerText = translatedClas;
       // 分數 20230707四捨五入至小數第二位
       var numb = predictions[0]['probability'];
       header4.innerText = numb.toFixed(2);
