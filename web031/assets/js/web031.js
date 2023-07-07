@@ -39,7 +39,8 @@ function predictLoop() {
       // 類別
       header2.innerText = predictions[0]['className'];
       // 分數 20230707四捨五入至小數第二位
-      header4.innerText = predictions[0]['probability'].toFixed(2);
+      var numb = predictions[0]['probability'];
+      header4.innerText = numb.toFixed(2);
       
       // 使用requestAnimationFrame進行下一輪預測
       requestAnimationFrame(predictLoop);
