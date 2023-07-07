@@ -7,7 +7,7 @@ const switchCameraBtn = document.getElementById("switchCameraBtn");
 const header2 = document.getElementById("prediction");
 const header4 = document.getElementById("score");
 
-let currentCamera = "user"; // 目前使用的鏡頭
+let currentCamera = "user"; // 目前使用的鏡頭為前鏡頭
 
 // 啟動手機鏡頭並進行影像辨識
 async function startCamera() {
