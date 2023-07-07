@@ -1,21 +1,11 @@
 // 將文本從英文翻譯成中文
-async function translateToChinese(text) {
-  const apiKey = 'AIzaSyCG-K7QWtn5ff3_zkY8dSgNd4eAo7hKSJs'; // 請替換為你的Google翻譯API金鑰YOUR_API_KEY
-  const targetLanguage = 'zh-tw'; 
-  const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      q: text,
-      target: targetLanguage,
-    }),
-  });
+// 翻译函数
+async function translateText(text) {
+  const response = await fetch(
+    `https://translation.googleapis.com/language/translate/v2?key="AIzaSyCG-K7QWtn5ff3_zkY8dSgNd4eAo7hKSJs"&source=en&target=zh-TW&q=${encodeURIComponent(text)}`
+  );
   const data = await response.json();
-  const translation = data.data.translations[0].translatedText;
-  return translation;
+  return data.data.translations[0].translatedText;
 }
 
 // 宣告video物件
@@ -76,9 +66,10 @@ function predictLoop() {
     model.classify(video).then(predictions => {
       console.log(predictions);
       // 類別
-      const clas = predictions[0]['className'];
-      const translatedClas = await translateToChinese(clas);
-      header2.innerText = translatedClas;
+      var clas = predictions[0]['className'];
+      // 翻译成英文
+      var translatedClass = await translateText(clas);
+      header2.innerText = translatedClass;
       // 分數 20230707四捨五入至小數第二位
       var numb = predictions[0]['probability'];
       header4.innerText = numb.toFixed(2);
