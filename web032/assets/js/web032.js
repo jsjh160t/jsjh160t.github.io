@@ -1,12 +1,3 @@
-// 將文本從英文翻譯成中文
-// 翻译函数
-async function translateText(text) {
-  const response = await fetch(
-    `https://translation.googleapis.com/language/translate/v2?key="AIzaSyCG-K7QWtn5ff3_zkY8dSgNd4eAo7hKSJs"&source=en&target=zh-TW&q=${encodeURIComponent(text)}`
-  );
-  const data = await response.json();
-  return data.data.translations[0].translatedText;
-}
 
 // 宣告video物件
 const video = document.getElementById("video");
@@ -66,10 +57,7 @@ function predictLoop() {
     model.classify(video).then(predictions => {
       console.log(predictions);
       // 類別
-      var clas = predictions[0]['className'];
-      // 翻译成英文
-      var translatedClass = await translateText(clas);
-      header2.innerText = translatedClass;
+      header2.innerText = predictions[0]['className'];
       // 分數 20230707四捨五入至小數第二位
       var numb = predictions[0]['probability'];
       header4.innerText = numb.toFixed(2);
