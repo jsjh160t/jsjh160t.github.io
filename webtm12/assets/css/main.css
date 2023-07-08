@@ -2043,7 +2043,7 @@
 			}
 
 		.image img {
-			border-radius: 0 em;  //原0.35
+			border-radius: 0.35 em;
 			display: block;
 		}
 
