@@ -2042,10 +2042,10 @@
 				opacity: 1.0;
 			}
 
-		//.image img {
-			//border-radius: 0.35em;
-			//display: block;
-		//20230708}
+		.image img {
+			border-radius: 0 em;  //原0.35
+			display: block;
+		}
 
 		.image.left {
 			float: left;
