@@ -4,13 +4,15 @@
   <title>翻譯器</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  
   <script>
     function translate() {
       var inputText = document.getElementById('input').value; // 取得使用者輸入的英文
       var translatedText = translateText(inputText); // 將英文翻譯成中文
       document.getElementById('output').textContent = translatedText; // 將翻譯結果顯示在網頁上
     }
-
     function translateText(input) {
       var apikey1='AIzaSyCG-K7QWtn5ff3_';
       var apikey2='zkY8dSgNd4eAo7hKSJs';
@@ -41,8 +43,6 @@
       });
     }
   </script>
-</head>
-<body>
   <h1>英文翻譯成中文</h1>
   <input type="text" id="input">
   <button onclick="translate()">翻譯</button>
