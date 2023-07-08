@@ -22,8 +22,8 @@ async function startCamera() {
     // 等待視訊串流載入完成後再執行影像辨識
     video.addEventListener("loadedmetadata", () => {
       // 確保視訊尺寸已經設定
-      video.width = video.videoWidth;
-      video.height = video.videoHeight;
+      video.width = video.videoWidth/1.5;
+      video.height = video.videoHeight/1.5;
       video.removeEventListener("loadedmetadata", arguments.callee);
 
       // 開始進行影像辨識預測
