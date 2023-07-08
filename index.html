@@ -1,50 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>翻譯器</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>OpenCC.js 範例</title>
+  <script src="https://unpkg.com/opencc"></script>
 </head>
+<body>
 <script>
-    function translate() {
-      var inputText = document.getElementById('input').value; // 取得使用者輸入的英文
-      var translatedText = translateText(inputText); // 將英文翻譯成中文
-      document.getElementById('output').textContent = translatedText; // 將翻譯結果顯示在網頁上
-    }
-    function translateText(input) {
-      var apikey1='AIzaSyCG-K7QWtn5ff3_';
-      var apikey2='zkY8dSgNd4eAo7hKSJs';
-      var apiKey = apikey1+apikey2; // 請將 YOUR_API_KEY 替換為你的谷歌翻譯 API 金鑰
-      var targetLanguage = 'zh-TW'; // 設定目標語言為繁體中文，可以根據需要修改
+// 在 JavaScript 中，定義一個翻譯函式
+function translate() {
+  // 獲取輸入框中的英文內容
+  var englishText = document.getElementById("inputText").value;
 
-      // 使用谷歌翻譯 API 進行翻譯
-      var apiUrl = 'https://translation.googleapis.com/language/translate/v2';
-      var requestData = {
-        q: input,
-        target: targetLanguage,
-        key: apiKey
-      };
+  // 使用適當的方法將英文翻譯成繁體中文，這裡使用了第三方庫 OpenCC.js
+  var chineseText = OpenCC.Converter("s2t").convertSync(englishText);
 
-      // 發送 API 請求
-      $.ajax({
-        url: apiUrl,
-        type: 'POST',
-        data: requestData,
-        dataType: 'json',
-        success: function(response) {
-          var translatedText = response.data.translations[0].translatedText;
-          document.getElementById('output').textContent = translatedText;
-        },
-        error: function(error) {
-          console.log('翻譯發生錯誤：', error);
-        }
-      });
-    }
-  </script>  
-<body>  
-  <h1>英文翻譯成中文</h1>
-  <input type="text" id="input">
-  <button onclick="translate()">翻譯</button>
-  <div id="output"></div>
+  // 將翻譯結果輸出到網頁上的某個元素中
+  document.getElementById("outputText").innerHTML = chineseText;
+}
+</script>
+// 在 HTML 中，需要有一個輸入框和一個按鈕，用於輸入英文和觸發翻譯的動作
+<input type="text" id="inputText">
+<button onclick="translate()">翻譯</button>
 </body>
 </html>
