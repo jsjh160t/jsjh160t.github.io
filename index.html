@@ -2,23 +2,22 @@
 <html>
 <head>
   <title>OpenCC.js 範例</title>
-  <script src="https://unpkg.com/opencc"></script>
+  <script src="https://unpkg.com/opencc@1.1.3/node/opencc.js"></script>
 </head>
 <body>
 <script>
-// 在 JavaScript 中，定義一個翻譯函式
-function translate() {
-  // 獲取輸入框中的英文內容
-  var englishText = document.getElementById("inputText").value;
-
-  // 使用適當的方法將英文翻譯成繁體中文，這裡使用了第三方庫 OpenCC.js
-  var chineseText = OpenCC.Converter("s2t").convertSync(englishText);
-
-  // 將翻譯結果輸出到網頁上的某個元素中
-  document.getElementById("outputText").innerHTML = chineseText;
-}
+  // 在 JavaScript 中，定義一個翻譯函式
+  function translate() {
+    // 獲取輸入框中的英文內容
+    var englishText = document.getElementById("inputText").value;
+  
+    // 使用適當的方法將英文翻譯成繁體中文，這裡使用了第三方庫 OpenCC.js
+    var chineseText = OpenCC.Converter("s2t").convertSync(englishText);
+  
+    // 將翻譯結果輸出到網頁上的某個元素中
+    document.getElementById("outputText").innerHTML = chineseText;
+  }
 </script>
-// 在 HTML 中，需要有一個輸入框和一個按鈕，用於輸入英文和觸發翻譯的動作
 <input type="text" id="inputText">
 <button onclick="translate()">翻譯</button>
 </body>
