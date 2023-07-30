@@ -22,6 +22,14 @@
 		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"></script>
 	   	<!-- 讀取模型套件 -->
 	  	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"></script>	
+		
+		<!-- 網頁翻譯20230730 -->
+		<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  		<script type="text/javascript">
+    			function googleTranslateElementInit() {
+    			new google.translate.TranslateElement({pageLanguage: 'zh-TW', includedLanguages: 'en,zh-CN,zh-TW', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    			}			
+		</script>
 	</head>
 	<body id="top">
 
@@ -39,6 +47,12 @@
 						<header class="major">
 							<h2>MobileNet動態影像視訊版</h2>	
 						</header>
+						
+						<!-- 網頁翻譯20230730 -->
+						<div id="google_translate_element"></div>
+  						<span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿
+  						</span>
+						
 						<div class="row justify-content-center">
 							<div class="col-4">
 								<button id="switchCameraBtn">切換鏡頭</button>
@@ -51,7 +65,7 @@
 							    <h2>預測(Prediction):<header id="prediction">Processing...</header></h2>
 							    <!-- 呈現分析結果信心分數 -->
 							    <h2>可信度(Confidence Score):<header id="score">Processing...</header></h2>
-							</div>							
+							</div>
 						</div>
 					</section>
 				<!-- Two -->
