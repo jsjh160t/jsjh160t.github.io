@@ -3,8 +3,7 @@
   <title>英文翻譯成中文</title>
 </head>
 <body>
-  <h1>English to Chinese v4</h1>
-  <div id="google_translate_element">網頁翻譯test</div>
+  <h1>English to Chinese</h1>
   <p>
     <input type="text" id="input_text" placeholder="請輸入英文文字">
     <button onclick="translateText()">翻譯</button>
@@ -12,10 +11,6 @@
   <div id="output_text"></div>
 
   <script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,ja,zh-CN,zh-TW', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-    }
-
     function translateText() {
         var inputText = document.getElementById("input_text").value;
         var outputElement = document.getElementById("output_text");
@@ -37,7 +32,6 @@
         xhr.open("GET", url, true);
         xhr.send();
     }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>	
+  </script>	
 </body>
 </html>
