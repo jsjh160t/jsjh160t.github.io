@@ -56,8 +56,29 @@ function predictLoop() {
     // 進行影像辨識預測
     model.classify(video).then(predictions => {
       console.log(predictions);
-      // 類別
-      header2.innerText = predictions[0]['className'];
+
+        // 使用 Google 翻譯 API 進行翻譯 20230731使用
+        var inputText = predictions[0]['className'];
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var translatedText = response[0][0][0];
+                    header2.innerText = translatedText;
+                } else {
+                    header2.innerText = "翻譯失敗";
+                }
+            }
+        };
+        var url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q=" + encodeURIComponent(inputText);
+        xhr.open("GET", url, true);
+        xhr.send();
+
+
+      // 類別 20230731暫停
+      //header2.innerText = predictions[0]['className'];
+
       // 分數 20230707四捨五入至小數第二位
       var numb = predictions[0]['probability'];
       header4.innerText = numb.toFixed(2);
