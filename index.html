@@ -3,15 +3,41 @@
   <title>英文翻譯成中文</title>
 </head>
 <body>
-  <h1>English to Chinese v3</h1>
-  <div id="google_translate_element">test1</div>
-  <span data-mce-type="bookmark" style="display: inline-block; width: 0px; overflow: hidden; line-height: 0;" class="mce_SELRES_start">﻿
-  >test2</span>
-  	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  	<script type="text/javascript">
-    	function googleTranslateElementInit() {
-    		new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,ja,zh-CN,zh-TW', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-    	}			
-	</script>
+  <h1>English to Chinese v4</h1>
+  <div id="google_translate_element">網頁翻譯test</div>
+  <p>
+    <input type="text" id="input_text" placeholder="請輸入英文文字">
+    <button onclick="translateText()">翻譯</button>
+  </p>
+  <div id="output_text"></div>
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,ja,zh-CN,zh-TW', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+
+    function translateText() {
+        var inputText = document.getElementById("input_text").value;
+        var outputElement = document.getElementById("output_text");
+        
+        // 使用 Google 翻譯 API 進行翻譯
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var translatedText = response[0][0][0];
+                    outputElement.innerHTML = translatedText;
+                } else {
+                    outputElement.innerHTML = "翻譯失敗";
+                }
+            }
+        };
+        var url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-TW&dt=t&q=" + encodeURIComponent(inputText);
+        xhr.open("GET", url, true);
+        xhr.send();
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>	
 </body>
 </html>
