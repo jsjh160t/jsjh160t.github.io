@@ -15,3 +15,4 @@ webtm2：TM image model in tf.js 上傳圖片版：webtm1修改<br>
 web03：MobileNet image model in tf.js 上傳圖片版<br>
 web031：MobileNet image model in tf.js 視訊版：web03修改，請chatgpt改為可在手機safari執行，手機chrome要開鏡頭權限<br>
 web032：MobileNet image model in tf.js 視訊版：web031修改，請chatgpt改為可切換手機鏡頭<br>
+web033：MobileNet image model in tf.js 視訊版：web032修改，增加翻譯(英翻中、網頁多語)<br>
